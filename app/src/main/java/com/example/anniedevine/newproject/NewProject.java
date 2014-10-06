@@ -33,6 +33,8 @@ public class NewProject extends Activity implements View.OnClickListener {
         // and listen for it here
         mainButton = (Button) findViewById(R.id.main_button);
         mainButton.setOnClickListener(this);
+        // 3. Access the EditText defined in layout XML
+        mainEditText = (EditText) findViewById(R.id.main_edittext);
     }
 
 
