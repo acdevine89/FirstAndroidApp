@@ -4,5 +4,6 @@
     <string name="app_name">NewProject</string>
     <string name="textview">What is the meaning of the Universe?</string>
     <string name="action_settings">Settings</string>
+    <string name="button">Update The TextView</string>
 
 </resources>
