@@ -10,9 +10,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 
 public class NewProject extends Activity implements View.OnClickListener {
@@ -20,7 +24,10 @@ public class NewProject extends Activity implements View.OnClickListener {
     TextView mainTextView;
     Button mainButton;
     EditText mainEditText;
-
+    ListView mainListView;
+    ArrayAdapter mArrayAdapter;
+    ArrayList mNameList = new ArrayList();
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
