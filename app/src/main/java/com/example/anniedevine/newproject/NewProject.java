@@ -59,7 +59,9 @@ public class NewProject extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        // Test the Button
-        mainTextView.setText("Button pressed!");
+        // Take what was typed into the EditText
+        // and use in TextView
+        mainTextView.setText(mainEditText.getText().toString()
+                + " is learning Android development!");
     }
 }
