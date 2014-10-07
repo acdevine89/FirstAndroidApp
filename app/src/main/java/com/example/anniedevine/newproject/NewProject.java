@@ -3,6 +3,7 @@ package com.example.anniedevine.newproject;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -61,22 +62,39 @@ public class NewProject extends Activity implements View.OnClickListener, Adapte
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.new_project, menu);
+        // Inflate the menu.
+        // Adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+
+        // Access the Share Item defined in menu XML
+        MenuItem shareItem = menu.findItem(R.id.menu_item_share);
+
+        // Access the object responsible for
+        // putting together the sharing submenu
+        if (shareItem != null) {
+            mShareActionProvider = (ShareActionProvider)shareItem.getActionProvider();
+        }
+
+        // Create an Intent to share your content
+        setShareIntent();
+
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+    private void setShareIntent() {
+
+        if (mShareActionProvider != null) {
+
+            // create an Intent with the contents of the TextView
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Android Development");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, mainTextView.getText());
+
+            // Make sure the provider knows
+            // it should work with that Intent
+            mShareActionProvider.setShareIntent(shareIntent);
         }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void onClick(View view) {
