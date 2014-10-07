@@ -64,7 +64,7 @@ public class NewProject extends Activity implements View.OnClickListener, Adapte
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu.
         // Adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.new_project, menu);
 
         // Access the Share Item defined in menu XML
         MenuItem shareItem = menu.findItem(R.id.menu_item_share);
@@ -95,6 +95,7 @@ public class NewProject extends Activity implements View.OnClickListener, Adapte
             // it should work with that Intent
             mShareActionProvider.setShareIntent(shareIntent);
         }
+    }
 
     @Override
     public void onClick(View view) {
@@ -106,6 +107,9 @@ public class NewProject extends Activity implements View.OnClickListener, Adapte
         // Also add that value to the list shown in the ListView
         mNameList.add(mainEditText.getText().toString());
         mArrayAdapter.notifyDataSetChanged();
+            // 6. The text you'd like to share has changed,
+            // and you need to update
+            setShareIntent();
     }
 
     @Override
