@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -61,6 +62,8 @@ public class NewProject extends Activity implements View.OnClickListener, Adapte
         mainListView.setAdapter(mArrayAdapter);
         // 5. Set this activity to react to list items being pressed
         mainListView.setOnItemClickListener(this);
+        // 7. Greet the user, or ask for their name if new
+        displayWelcome();
     }
 
 
@@ -121,5 +124,21 @@ public class NewProject extends Activity implements View.OnClickListener, Adapte
         // Log the item's position and contents
         // to the console in Debug
         Log.d("omg android", position + ": " + mNameList.get(position));
+    }
+
+    public void displayWelcome() {
+
+        // Access the device's key-value storage
+        mSharedPreferences = getSharedPreferences(PREFS, MODE_PRIVATE);
+
+        // Read the user's name,
+        // or an empty string if nothing found
+        String name = mSharedPreferences.getString(PREF_NAME, "");
+
+        if (name.length() > 0) {
+
+            // If the name is valid, display a Toast welcoming them
+            Toast.makeText(this, "Welcome back, " + name + "!", Toast.LENGTH_LONG).show();
+        }
     }
 }
