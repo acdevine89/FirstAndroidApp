@@ -27,7 +27,7 @@ public class NewProject extends Activity implements View.OnClickListener {
     ListView mainListView;
     ArrayAdapter mArrayAdapter;
     ArrayList mNameList = new ArrayList();
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +42,16 @@ public class NewProject extends Activity implements View.OnClickListener {
         mainButton.setOnClickListener(this);
         // 3. Access the EditText defined in layout XML
         mainEditText = (EditText) findViewById(R.id.main_edittext);
+        // 4. Access the ListView
+        mainListView = (ListView) findViewById(R.id.main_listview);
+
+        // Create an ArrayAdapter for the ListView
+        mArrayAdapter = new ArrayAdapter(this,
+                android.R.layout.simple_list_item_1,
+                mNameList);
+
+        // Set the ListView to use the ArrayAdapter
+        mainListView.setAdapter(mArrayAdapter);
     }
 
 
@@ -70,5 +80,9 @@ public class NewProject extends Activity implements View.OnClickListener {
         // and use in TextView
         mainTextView.setText(mainEditText.getText().toString()
                 + " is learning Android development!");
+
+        // Also add that value to the list shown in the ListView
+        mNameList.add(mainEditText.getText().toString());
+        mArrayAdapter.notifyDataSetChanged();
     }
 }
